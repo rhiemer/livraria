@@ -8,21 +8,15 @@
 
 <ui:composition template="_template.xhtml">
 	<ui:define name="titulo">
-            Autor
+            Principal
         </ui:define>
 	<ui:define name="conteudo">
 
 		<h:form>
-			<p:messages autoUpdate="true" />
-			<p:fieldset legend="Dados do Autor">
-				<p:panelGrid columns="2">
-					<p:outputLabel value="Nome:" for="nome" />
-					<p:inputText id="nome" value="#{autorBean.autor.nome}"
-						required="true" requiredMessage="Nome obrigatório" />
-					<p:commandButton value="Gravar" action="#{autorBean.gravar}"
-						ajax="false" />
-				</p:panelGrid>
-			</p:fieldset>
+			<p:panelGrid>
+				<p:fieldset legend="Tela Principal">
+				</p:fieldset>
+			</p:panelGrid>
 		</h:form>
 	</ui:define>
 </ui:composition>

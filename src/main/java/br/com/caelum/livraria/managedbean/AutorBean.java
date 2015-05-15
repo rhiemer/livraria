@@ -20,10 +20,12 @@ public class AutorBean {
 		return autor;
 	}
 
-	public void gravar() {
+	public String gravar() {
 
 		autorController.adiciona(this.autor);
 
 		this.autor = new Autor();
+
+		return "livro?faces-redirect=true";
 	}
 }
