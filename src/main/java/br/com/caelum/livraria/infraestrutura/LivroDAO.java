@@ -1,11 +1,11 @@
-package br.com.caelum.livraria.negocio;
+package br.com.caelum.livraria.infraestrutura;
 
 import java.util.List;
 
 import br.com.caelum.livraria.modelo.Livro;
 
 
-public interface LivroController extends Controller {
+public interface LivroDAO extends Repositorio {
 
 	void adiciona(Livro livro);
 

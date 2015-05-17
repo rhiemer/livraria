@@ -1,8 +1,8 @@
-package br.com.caelum.livraria.crud;
+package br.com.caelum.livraria.infraestrutura;
 
 import java.util.List;
 
-public interface Crud<T, K> {
+public interface Crud<T, K> extends Repositorio {
 
 	public void adiciona(T t);
 

@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
-<ui:composition template="_template.xhtml">
+<ui:composition template="/_template.xhtml">
 	<ui:define name="titulo">
             Livro
         </ui:define>
@@ -31,8 +31,7 @@
 							value="#{livroBean.livro.isbn}"
 							validator="#{livroBean.comecaComDigitoUm}" required="true"
 							requiredMessage="ISBN Obrigatório"
-							validatorMessage="Complete o numero do ISBN">
-							<f:validateLength minimum="17" />
+							validatorMessage="O numero do ISBN deve começar com 1">
 							<p:ajax event="blur" />
 						</p:inputMask>
 
@@ -57,8 +56,8 @@
 				</p:fieldset>
 				<p:fieldset id="dadosDoAutor" legend="Dados do Autor">
 					<p:outputLabel value="Selecione" />
-					<h:commandLink value="ou cadastre um novo autor"
-						action="autor?faces-redirect=true" immediate="true" />
+					<p:commandLink value="ou cadastre um novo autor"
+						action="/private/autor?faces-redirect=true" immediate="true" />
 					<br />
 					<p:panelGrid columns="2">
 						<p:selectOneMenu value="#{livroBean.novoAutorId}" id="autor">
@@ -72,7 +71,8 @@
 					<br />
 
 					<p:dataTable value="#{livroBean.autoresDoLivro}" var="autor"
-						id="tabelaDeAutoresDoLivro" emptyMessage="Nenhum Autor relacionado">
+						id="tabelaDeAutoresDoLivro"
+						emptyMessage="Nenhum Autor relacionado">
 						<p:column>
 							<h:outputText value="#{autor.nome}" />
 						</p:column>
@@ -80,8 +80,7 @@
 				</p:fieldset>
 			</p:panelGrid>
 			<br />
-			<p:commandButton value="Gravar" process="@form" update="@this,@form"
-				actionListener="#{livroBean.gravar}" />
+			<p:commandButton value="Gravar" action="#{livroBean.gravar}" ajax="false" />
 			<br />
 
 			<p:dataTable id="livros" value="#{livroBean.livros}" var="livro"

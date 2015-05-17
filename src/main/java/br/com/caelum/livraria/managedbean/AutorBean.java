@@ -1,20 +1,18 @@
 package br.com.caelum.livraria.managedbean;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import javax.inject.Named;
 
+import br.com.caelum.livraria.dominio.AutorService;
 import br.com.caelum.livraria.modelo.Autor;
-import br.com.caelum.livraria.negocio.AutorController;
 
-@Named
-@RequestScoped
+@Model
 public class AutorBean {
 
 	private Autor autor = new Autor();
 
 	@Inject
-	private AutorController autorController;
+	private AutorService autorService;
 
 	public Autor getAutor() {
 		return autor;
@@ -22,10 +20,10 @@ public class AutorBean {
 
 	public String gravar() {
 
-		autorController.adiciona(this.autor);
+		autorService.adicionaAutor(this.autor);
 
 		this.autor = new Autor();
 
-		return "livro?faces-redirect=true";
+		return "/private/livro?faces-redirect=true";
 	}
 }

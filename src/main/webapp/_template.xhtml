@@ -8,26 +8,31 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title><ui:insert name="titulo"></ui:insert> - Bilioteca</title>
+	<title><ui:insert name="titulo"></ui:insert> - Livraria</title>
 </h:head>
 <h:body>
 
 
 	<div id="cabecalho">
 		<h1>
-			<h:graphicImage library="img" name="logo.png" />
-			<p:themeSwitcher value="#{temaBean.tema}"
-				style="position: absolute; right: 10px;">
-				<f:selectItems value="#{temaBean.temas}" />
-				<f:ajax />
-			</p:themeSwitcher>
+			<h:panelGrid columns="3" cellpadding="10">			    
+				<h:graphicImage library="img" name="logo.png" />
+				<p:outputLabel value="#{subjectBean.loginUsuario}" />
+				<p:themeSwitcher value="#{temaBean.tema}"
+					style="position: absolute; right: 10px;">
+					<f:selectItems value="#{temaBean.temas}" />
+					<f:ajax />
+				</p:themeSwitcher>
+			</h:panelGrid>
 			<h:form>
 				<p:menubar id="menu">
-					<p:menuitem value="Home" action="home?faces-redirect=true"
+					<p:menuitem value="Home" action="/private/home?faces-redirect=true"
 						immediate="true" />
-					<p:menuitem value="Autor" action="autor?faces-redirect=true"
+					<p:menuitem value="Autor" action="/private/autor?faces-redirect=true"
 						immediate="true" />
-					<p:menuitem value="Livro" action="livro?faces-redirect=true"
+					<p:menuitem value="Livro" action="/private/livro?faces-redirect=true"
+						immediate="true" />
+					<p:menuitem value="LogOut" action="#{loginBean.logout}"
 						immediate="true" />
 				</p:menubar>
 			</h:form>
@@ -41,13 +46,11 @@
 		<ui:insert name="conteudo"></ui:insert>
 	</div>
 
-	<footer>
 	<div id="footer-wrapper">
 		<p>
 			Desenvolvido por <a href="mailto:rodrigohiemer@hotmail.com">rhiemer</a>
 		</p>
 	</div>
-	</footer>
 </h:body>
 
 </html>

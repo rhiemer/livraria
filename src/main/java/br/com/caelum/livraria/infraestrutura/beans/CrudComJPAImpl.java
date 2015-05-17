@@ -1,12 +1,16 @@
-package br.com.caelum.livraria.crud;
+package br.com.caelum.livraria.infraestrutura.beans;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
+
+import br.com.caelum.livraria.infraestrutura.Crud;
 
 public abstract class CrudComJPAImpl<T, K> implements Crud<T, K> {
 
@@ -36,7 +40,8 @@ public abstract class CrudComJPAImpl<T, K> implements Crud<T, K> {
 	 */
 
 	@Override
-	public void adiciona(T t) {
+	@TransactionAttribute(TransactionAttributeType.MANDATORY)
+	public void adiciona(T t)  {
 
 		em.persist(t);
 	}
@@ -47,6 +52,7 @@ public abstract class CrudComJPAImpl<T, K> implements Crud<T, K> {
 	 * @see br.com.caelum.livraria.dao.DAO#remove(T)
 	 */
 	@Override
+	@TransactionAttribute(TransactionAttributeType.MANDATORY)
 	public void remove(T t) {
 		em.remove(em.merge(t));
 		em.flush();
@@ -58,6 +64,7 @@ public abstract class CrudComJPAImpl<T, K> implements Crud<T, K> {
 	 * @see br.com.caelum.livraria.dao.DAO#atualiza(T)
 	 */
 	@Override
+	@TransactionAttribute(TransactionAttributeType.MANDATORY)
 	public void atualiza(T t) {
 		em.merge(t);
 		em.flush();

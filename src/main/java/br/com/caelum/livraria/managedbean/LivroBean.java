@@ -12,10 +12,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.caelum.livraria.dominio.AutorService;
+import br.com.caelum.livraria.dominio.LivroService;
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.modelo.Livro;
-import br.com.caelum.livraria.negocio.AutorController;
-import br.com.caelum.livraria.negocio.LivroController;
 
 @Named
 @ViewScoped
@@ -27,10 +27,10 @@ public class LivroBean implements Serializable {
 	private Integer novoAutorId;
 
 	@Inject
-	private AutorController autorController;
+	private AutorService autorService;
 
 	@Inject
-	private LivroController livroController;
+	private LivroService livroService;
 
 	@Inject
 	private FacesContext facesContext;
@@ -40,11 +40,11 @@ public class LivroBean implements Serializable {
 	}
 
 	public List<Livro> getLivros() {
-		return livroController.listaTodos();
+		return livroService.listaTodosOsLivros();
 	}
 
 	public List<Autor> getAutores() {
-		return autorController.listaTodos();
+		return autorService.listaTodosAutores();
 	}
 
 	public Set<Autor> getAutoresDoLivro() {
@@ -52,7 +52,7 @@ public class LivroBean implements Serializable {
 	}
 
 	public void gravarAutor() {
-		Autor novoAutor = autorController.buscaPorId(novoAutorId);
+		Autor novoAutor = autorService.buscaAutorPorCodigo(novoAutorId);
 		this.livro.adicionaAutor(novoAutor);
 	}
 
@@ -64,7 +64,7 @@ public class LivroBean implements Serializable {
 			return;
 		}
 
-		livroController.adiciona(this.livro);
+		livroService.adicionaLivro(this.livro);
 
 		this.livro = new Livro();
 	}
